@@ -125,7 +125,8 @@ export default {
 .fir_w {
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 30px;
+  padding-top: 20px;
   background: url("../assets/1.png");
   background-size: 100% 100%;
 }
