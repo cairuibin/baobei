@@ -2,7 +2,7 @@
   <div class="task_center">
   
     <HeaderNav />
-    
+   
   </div>
 </template>
 

@@ -1,7 +1,8 @@
 <template>
   <div class="number">
+   <HeaderNav />
     <el-container>
-      <el-header>Header</el-header>
+     
       <el-container class="wx_container">
         <el-aside width="200px">Aside</el-aside>
         <el-container>
@@ -14,7 +15,12 @@
 </template>
 
 <script>
-export default {};
+import HeaderNav from '../components/header_nav'
+export default {
+  components:{
+    HeaderNav
+  }
+};
 </script>
 
 <style lang="scss">
