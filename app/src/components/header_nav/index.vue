@@ -1,10 +1,10 @@
 <template>
   <el-row type="flex" class="row-bg">
-    <el-col :span="4">
+    <el-col :span="3">
       <img class="logo-png" src="../../assets/1.png" alt />
     </el-col>
     <el-col :span="2"></el-col>
-    <el-col  :span="18">
+    <el-col :span="18">
       <el-button v-for="(item,index) in menulist" :key="index" type="primary">{{item}}{{index}}</el-button>
     </el-col>
   </el-row>
@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss">
 .row-bg {
-  padding: 10px;
+  padding: 10px 20px;
   background-color: #fff;
   width: 100%;
   height: 75px;
@@ -34,7 +34,9 @@ export default {
   width: 100%;
   height: 100%;
 }
-.el-col{
-    display: flex;justify-content: space-around;align-items: center;
+.el-col {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>

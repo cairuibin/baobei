@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="task_center">
   
     <HeaderNav />
     
@@ -15,5 +15,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss'>
+.task_center{
+  padding: 20px;
+}
 </style>
