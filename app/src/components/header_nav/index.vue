@@ -6,7 +6,7 @@
     </el-col>
     <el-col :span="2"></el-col>
     <el-col :span="18">
-      <el-button v-for="(item,index) in menulist" :key="index" type="primary">{{item}}{{index}}</el-button>
+      <el-button  v-for="(item,index) in menulist" :key="index" type="primary">{{item}}{{index}}</el-button>
     </el-col>
   </el-row>
  </div>

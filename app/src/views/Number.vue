@@ -44,7 +44,7 @@ export default {
 }
 .se_wrap{
   width: 100%;
-  height: 53%;
+  height: 51%;
   display: flex;justify-content: space-around;
 }
 .th_wrap{
