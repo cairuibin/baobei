@@ -65,7 +65,7 @@ export default {
     text-align: center;
   }
 }
-.main{
+.main {
   flex: 1;
 }
 .active {

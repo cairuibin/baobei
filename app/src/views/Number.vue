@@ -40,7 +40,7 @@ export default {
 <style lang="scss" scoped>
 .number {
   width: 100%;
-  height: 100%;
+  height: 100%;padding: 20px;
 }
 .se_wrap{
   width: 100%;

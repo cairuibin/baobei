@@ -1,190 +1,199 @@
 <template>
-  <div class="homePage">
-    <div class="heade">
-      <ul class="ul">
-        <li class="picture">
-          <img src alt />
-        </li>
-        <li class="two">
-          <div style="color:orange;fontSize:14px;">常用功能快速入口（支持用户个性化配置）</div>
-          <div class="tab">
-            <span>菜单一</span>
-            <span>菜单二</span>
-            <span>菜单三</span>
-            <span>菜单四</span>
-            <span>菜单五</span>
-          </div>
-        </li>
-        <li class="three">
-          <select name id>
-            <option value="通州项目">通州项目</option>
-            <option value>丰台项目</option>
-            <option value>房山项目</option>
-            <option value>东城项目</option>
-            <option value>朝阳项目</option>
-          </select>
-          <span>当前用户：张涛</span>
-          <span class="help">帮助</span>
-        </li>
-      </ul>
-    </div>
-    <main class="main">
-      <span class="bj"></span>
-      <h1>建元城投智慧管廊运营管理平台</h1>
-      <div class="login">
-        <van-form @submit="onSubmit">
-          <van-field
-            v-model="username"
-            name="用户名"
-            label="用户名："
-            placeholder="用户名"
-            :rules="[{ required: true, message: '请填写用户名' }]"
-          />
-          <van-field
-            v-model="password"
-            type="password"
-            name="密码"
-            label="密    码："
-            placeholder="密码"
-            :rules="[{ required: true, message: '请填写密码' }]"
-          />
+  <div class="fir_w">
+    <div class="first_wrap">
+      <el-row type="flex" class="row-bg">
+        <el-col :span="3">
+          <img class="logo-png" src="../assets/1.png" alt />
+        </el-col>
+        <el-col :span="4" class="getway_for">
+          <div class="text_bold">常用功能快速入口（一些常用功能）</div>
           <div>
-            <button class="ok">登录</button>
-            <button class="forgetpwd">忘记密码</button>
+            <el-button
+              size="small"
+              plan
+              v-for="(item,index) in 5"
+              :key="index"
+              type="primary"
+            >{{'常用按钮'}}</el-button>
           </div>
-        </van-form>
-      </div>
-    </main>
-    <footer class="footer">
-        <ol class="ol">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ol>
-    </footer>
-    <router-view></router-view>
+        </el-col>
+        <el-col :span="8" class="right_box">
+          <div class="item">
+            <el-select v-model="value" clearable placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </div>
+          <div class="item">当前用户：{{'张青'}}</div>
+          <div class="item">
+            <el-button type="primary" plain>主要按钮</el-button>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="main">
+      <el-form
+        :model="ruleForm"
+        status-icon
+        :rules="rules"
+        ref="ruleForm"
+        label-width="100px"
+        class="demo-ruleForm form_wxy"
+      >
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model.number="ruleForm.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密 码" prop="pass">
+          <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+          <!-- <el-button @click="resetForm('ruleForm')">重置</el-button> -->
+          <el-button type="primary">忘记密码</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+    <div class="footer">
+      <el-card class="box-card">
+        <img class="img_item" v-for="o in 5" :key="o" src="../assets/1.png" alt />
+      </el-card>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
+    var checkAge = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("用户名不能为空"));
+      }
+      setTimeout(() => {
+        callback();
+      }, 1000);
+    };
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.ruleForm.checkPass !== "") {
+          this.$refs.ruleForm.validateField("checkPass");
+        }
+        callback();
+      }
+    };
+
     return {
-      username: "",
-      password: "",
+      ruleForm: {
+        pass: "",
+        username: "",
+      },
+      rules: {
+        pass: [{ validator: validatePass, trigger: "blur" }],
+        username: [{ validator: checkAge, trigger: "blur" }],
+      },
     };
   },
+  computed: {
+    ...mapState(["menulist", "options", "value"]),
+  },
   methods: {
-    onSubmit(values) {
-      console.log("submit", values);
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     },
   },
 };
 </script>
 
-<style lang='scss' scoped>
-.homePage {
-  width: 98%;
+<style lang="scss" scoped>
+.fir_w {
+  width: 100%;
   height: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  .heade {
-    width: 100%;
-    height: 70px;
-    // margin: 0 auto;
-    // line-height: 70px;
+  padding: 20px;
+  background: url("../assets/1.png");
+  background-size: 100% 100%;
+}
+.main {
+  width: 100%;
+  height: 60%;
+}
+.first_wrap {
+  padding: 5px;
+  padding-top: 0;
+}
+.row-bg {
+  padding: 10px 25px;
+  background-color: #fff;
+  width: 100%;
+  height: 95px;
+  border: 1px solid #444;
+}
+.logo-png {
+  width: 100%;
+  height: 100%;
+}
 
-    .ul {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      li {
-        flex: 1;
-        margin-left: 15px;
-        background: #ccc;
-      }
-    }
-    .two {
-      padding-top: 8px;
-      text-align: center;
-      line-height: 28px;
-      font-size: 14px;
-      .tab {
-        display: flex;
-        span {
-          flex: 1;
-        }
-      }
-    }
-    .three {
-      line-height: 70px;
-      select {
-        margin-left: 10px;
-      }
-      .help {
-        background: #dddd;
-        float: right;
-        line-height: normal;
-        margin-top: 24px;
-      }
-    }
+.el-col {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.getway_for {
+  width: 48%;
+  display: flex;
+  justify-content: space-around;
+  background: #eee;
+  margin: 0 2%;
+  padding-bottom: 10px;
+  height: 75px;
+  flex-wrap: wrap;
+  .text_bold {
+    min-width: 500px;
+    text-align: center;
+    line-height: 28px;
+    font-size: 16px;
+    color: yellowgreen;
   }
-  .main {
-    width: 98%;
-    flex: 1;
-    margin-left: 15px;
-    height: 100%;
-    margin-top: 50px;
-    h1 {
-      float: right;
-    }
-    .bj{
-      // width: 100%;
-      // height: 100%;
-      background:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597729387433&di=61376c272dea93203c5fae6c67547014&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Fback_pic%2F00%2F09%2F47%2F77562eea631a31c.jpg) no-repeat 5px 5px ;
-      background-size: cover;
-      opacity:0.2;
-      display: flex;
-    }
-    .login {
-      float: right;
-      width: 400px;
-      height: 160px;
-      border: 1px solid #ccc;
-      margin: 125px -414px 80px;
-      .ok {
-        width: 85px;
-        height: 30px;
-        text-align: center;
-        margin: 15px 5px 10px 90px;
-      }
-      .forgetpwd {
-        width: 85px;
-        height: 30px;
-        text-align: center;
-      }
-    }
-  }
-  .footer{
-    width: 98%;
-    height: 120px;
-    background: gainsboro;
-    margin-left: 15px;
-  }
-  .ol{
-    display: flex;
-    li{
-      margin: 15px 10px 10px 10px;
-      width: 30px;
-      height: 90px;
-      border: 1px solid red;
-      flex:1;
-      text-align: center;
-      align-items: center;
-    }
-  }
+}
+.form_wxy {
+  width: 400px;
+  position: absolute;
+  right: 10%;
+  top: 30%;
+  background: #fff;
+  padding-top: 40px;
+  padding-right: 60px;
+  padding-bottom: 10px;
+  border-radius: 12px;
+}
+.el-form-item {
+  margin-bottom: 36px;
+}
+.footer {
+  width: 100%;
+  height: 27%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.img_item{
+  padding: 0 10px;
+  width: 20%;font-display: block;
 }
 </style>
