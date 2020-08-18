@@ -1,5 +1,6 @@
 <template>
-  <el-row type="flex" class="row-bg">
+ <div class="wrap">
+      <el-row type="flex" class="row-bg">
     <el-col :span="3">
       <img class="logo-png" src="../../assets/1.png" alt />
     </el-col>
@@ -8,6 +9,7 @@
       <el-button v-for="(item,index) in menulist" :key="index" type="primary">{{item}}{{index}}</el-button>
     </el-col>
   </el-row>
+ </div>
 </template>
 
 <script>
@@ -22,7 +24,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.wrap{
+    padding: 20px;
+}
 .row-bg {
   padding: 10px 20px;
   background-color: #fff;
@@ -34,6 +39,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .el-col {
   display: flex;
   justify-content: space-around;
